@@ -5,6 +5,10 @@
 	- available on [Google Fonts](https://fonts.google.com/specimen/Montserrat)
 	- used on all variants
 
+### Script
+
+- Grid support script by **Harry** (**harryarry**) for his **MinUIfied** theme
+
 ### Images
 - Buttons backgrounds by **Codioful (Formerly Gradienta)**
 	- [Website link](https://codioful.com/)
@@ -12,4 +16,5 @@
 	- used on Dark and White variants
 
 ### Icons
-- All icons have been handmade by the creator (**Rosabel**) using Figma
+- Original "Naomi" icon by **Lucie Viatgé**
+- All the other icons have been handmade by the creator (**Rosabel**) using Figma
