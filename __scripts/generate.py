@@ -3,8 +3,9 @@ import tools.files_tools as d
 import tools.generate_tools as g
 
 buildFolder = "../__build"
+factoryFolder = "../__factory"
 interFolder = f"{buildFolder}/__intermediate"
-commonFolder = "../Common"
+commonFolder = "../__common"
 
 
 def generateMacro(themeName: str, tempateName: str):
@@ -12,8 +13,12 @@ def generateMacro(themeName: str, tempateName: str):
     c.task(f"Generating schemes for {themeName} version...")
     g.cookTheme(interFolder, f"../{themeName}/", commonFolder)
     d.createFolder(f"{interFolder}/schemes")
-    g.generateSchemes("./template/default.txt", f"./data/{tempateName}.json", f"{interFolder}/schemes/default.txt")
-    g.generateSchemes("./template/muxlaunch.txt", f"./data/{tempateName}.json", f"{interFolder}/schemes/muxlaunch.txt")
+    g.generateSchemes(f"{factoryFolder}/template/default.txt",
+                      f"{factoryFolder}/data/{tempateName}.json",
+                      f"{interFolder}/schemes/default.txt")
+    g.generateSchemes(f"{factoryFolder}/template/muxlaunch.txt",
+                      f"{factoryFolder}/data/{tempateName}.json",
+                      f"{interFolder}/schemes/muxlaunch.txt")
     g.zipFolder(interFolder, f"{buildFolder}/Rezolution{themeName}.zip")
     d.deleteFilesInFolder(interFolder)
 
