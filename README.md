@@ -22,15 +22,15 @@ git clone https://github.com/oiimrosabel/RezolutionMuOSTheme.git
 ```bash
 cd ./__factory
 ```
-3. Execute the "generators" script (important) :
+3. Execute the generation script (important) :
 ```bash
-bash ./generate.sh && bash ./zip.sh
+python3 ./generate.py
 ```
 4. Head over to the `__build` folder at the root of the project. You should find at least 3 zips, one for each color variant.
 5. (**Optional**) If you plan to tinker with the theme (for example, to create your own), make sure to clean the `__build` folder by executing :
 ```bash
 # cd ./__factory
-bash ./clean.sh
+python3 ./clean.py
 ```
 6. Move the zips to the correct folder, as indicated above (from the 4th instruction onwards)
 
@@ -40,7 +40,7 @@ For convenience, you can copy-paste the following script into a `.sh` file and e
 ```bash
 git clone https://github.com/oiimrosabel/RezolutionMuOSTheme.git
 cd ./RezolutionMuOSTheme/__factory
-bash ./generate.sh && bash ./zip.sh
+python3 ./generate.py
 cd ../__build
 ls
 ```
@@ -48,6 +48,7 @@ ls
 ## Troubleshooting
 ### Your screen is blank and/or your system gets bricked
 > Please go into your `MUOS/theme/active` folder and remove everything in there, your system should now boot and you can choose a different (not broken) theme. - [Harry](https://hmcneill46.github.io/muOS-MinUIfied-Theme-Generator/)
+
 ### An error occurred during the "generation" phase
 Send me a message on Discord by DMs (`@oiimrosabel`) with the error message, I'll help you troubleshoot the issue.
 

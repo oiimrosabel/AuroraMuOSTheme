@@ -1,4 +1,3 @@
 __build
-Dark/scheme/*
-White/scheme/*
-Indigo/scheme/*
+__factory/.idea
+__factory/tools/__pycache__
