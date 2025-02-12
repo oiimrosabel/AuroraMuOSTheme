@@ -8,8 +8,8 @@ import tools.display_tools as c
 def interpretAsJson(jsonString: str) -> dict:
     try:
         return json.loads(jsonString)
-    except json.decoder.JSONDecodeError:
-        c.error(f"Invalid JSON")
+    except json.decoder.JSONDecodeError as error:
+        c.error(f"Invalid JSON : {error.msg}")
         exit(os.EX_DATAERR)
 
 

@@ -43,7 +43,7 @@ def readFile(filePath: str) -> str:
             c.success(f"File {filePath} read successfully")
             return file.read()
     except FileNotFoundError:
-        c.error("File not found")
+        c.error(f"File not found : {filePath}")
         exit(os.EX_DATAERR)
 
 
@@ -53,7 +53,7 @@ def saveFile(filePath: str, content: str) -> None:
             file.write(content)
             c.success(f"File {filePath} saved successfully")
     except FileNotFoundError:
-        c.error("File not found")
+        c.error(f"File not found : {filePath}")
         exit(os.EX_DATAERR)
     except IOError as e:
         c.error(f"Unable to edit '{filePath}': {e}")
