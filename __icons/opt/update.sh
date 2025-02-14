@@ -11,8 +11,9 @@ SCREEN_HEIGHT=$(GET_VAR device mux/height)
 CORE_DIRECTORY="/run/muos/storage/info/core"
 DEST_GRID_FOLDER="/run/muos/storage/info/catalogue/Folder/grid"
 TEMP_FOLDER="$DEST_GRID_FOLDER/resolutions" # Use temp folder to allow for excess files to be removed
-SCREEN_RESOLUTION="${SCREEN_WIDTH}x${SCREEN_HEIGHT}"
-SOURCE_GRID_FOLDER="$TEMP_FOLDER/$SCREEN_RESOLUTION" # Find out what folder the device should be looking for
+# SCREEN_RESOLUTION="${SCREEN_WIDTH}x${SCREEN_HEIGHT}" TODO : add support for multiple resolutions
+SOURCE_GRID_FOLDER="$TEMP_FOLDER" # For now, only supports 128x128 icons (for 640x480 devices)
+# SOURCE_GRID_FOLDER="$TEMP_FOLDER/$SCREEN_RESOLUTION" # Find out what folder the device should be looking for
 ASSIGN_JSON="/mnt/mmc/MUOS/info/assign.json"
 ASSIGN_FOLDER="/mnt/mmc/MUOS/info/assign"
 
