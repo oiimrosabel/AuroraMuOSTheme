@@ -2,12 +2,12 @@
 	"void": "000000",
 	
 	"text": "FFFFFF",
-	"active": "BEC6FF",
+	"active": "5468E3",
 	"low": "F94144",
 	
-	"bg": "4B4CAE",
-	"hover": "3B3C98",
-	"widget": "7174C9",
+	"bg": "000000",
+	"hover": "202020",
+	"widget": "404040",
 	
 	"radius": "32",
 	"padding": "12"

@@ -22,7 +22,7 @@ git clone https://github.com/oiimrosabel/RezolutionMuOSTheme.git
 ```bash
 cd ./__factory
 ```
-3. Execute the generation script (important) :
+3. Execute the generation script :
 ```bash
 python3 ./generate.py
 ```
@@ -53,6 +53,4 @@ ls
 Send me a message on Discord by DMs (`@oiimrosabel`) with the error message, I'll help you troubleshoot the issue.
 
 ## Grid support
-Grid support is still in development. For now, only the system icons are available (in the `__icons` folder), alongside the script to install them.
-
-The "generators" script (specifically `zip.sh`) will generate an archive named `SystemIcons.zip`, similar to the one used for the **MinUIfied** theme. You'll only have to follow the steps described above to generate it. Then, you'll just have to follow the steps indicated [here](https://hmcneill46.github.io/muOS-MinUIfied-Theme-Generator/Grid-Theme-Gallery/) to install the icons, and use them with the **MinUIfied** theme.
+Grid support is still in development. For now, only the system icons are available (in the `__icons` folder), alongside the script to install them (through the **Archive Manager**).

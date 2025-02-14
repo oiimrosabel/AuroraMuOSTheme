@@ -7,7 +7,8 @@
 	
 	"bg": "101010",
 	"hover": "202020",
-	"widget": "181818",
+	"widget": "262D56",
 	
-	"radius": "32"
+	"radius": "32",
+	"padding": "12"
 }
