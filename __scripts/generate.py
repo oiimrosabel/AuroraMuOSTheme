@@ -10,7 +10,7 @@ interFolder = f"{buildFolder}/__intermediate"
 commonFolder = "../__common"
 
 
-def generateMacro(themeName: str):
+def generateMacro(themeName: str, gridSupport = True):
     d.createFolder(interFolder)
     c.task(f"Generating schemes for {themeName} version...")
     g.cookTheme(interFolder, f"../{themeName}/", commonFolder)
@@ -21,6 +21,10 @@ def generateMacro(themeName: str):
     g.generateSchemes(f"{factoryFolder}/template/muxlaunch.txt",
                       f"{factoryFolder}/data/template{themeName}.json",
                       f"{interFolder}/scheme/muxlaunch.txt")
+    if gridSupport:
+        g.generateSchemes(f"{factoryFolder}/template/muxplore.txt",
+                  f"{factoryFolder}/data/template{themeName}.json",
+                  f"{interFolder}/scheme/muxplore.txt")
     g.zipFolder(interFolder, f"{buildFolder}/Rezolution{themeName}.zip")
     d.deleteFilesInFolder(interFolder)
 
