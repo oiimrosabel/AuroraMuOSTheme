@@ -13,8 +13,8 @@
 - [x] Update `README.md`
 
 ## Planned for Release 3 (Iter 4.X)
-- [ ] Add proper grid support (variant ?)
-- [ ] Add absolute paths in `generate.py`
+- [x] Add proper grid support (variant ?)
+- [x] Rework templates (`default.txt` -> `muxlaunch.txt`)
 
 ## Planned for Release 4 (Iter 5.X)
 - [ ] extra resolutions

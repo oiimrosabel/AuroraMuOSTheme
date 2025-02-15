@@ -4,6 +4,9 @@ import re
 
 import tools.display_tools as c
 
+NOTFOUND_PLACEHOLDER = "##NOTFOUND##"
+nf = NOTFOUND_PLACEHOLDER
+
 
 def interpretAsJson(jsonString: str) -> dict:
     try:
@@ -14,8 +17,4 @@ def interpretAsJson(jsonString: str) -> dict:
 
 
 def replaceMustaches(template: str, data: dict[str, str]) -> str:
-    def replacer(match):
-        key = match.group(1)
-        return str(data.get(key, '##NOTFOUND##'))
-
-    return re.sub('{{(.*?)}}', replacer, template)
+    return re.sub('{{(.*?)}}', lambda match: str(data.get(match.group(1), nf)), template)
