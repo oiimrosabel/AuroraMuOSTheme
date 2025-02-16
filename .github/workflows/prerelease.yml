@@ -1,4 +1,4 @@
-name: Generate Release Archives
+name: Generate Test Artifacts
 
 on:
   push:
@@ -24,11 +24,9 @@ jobs:
       - name: Generate Theme Archives
         run: python -m muos_rezolution --grid both --theme All
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v4
         with:
-          name: "[TEST] Release ${{ github.ref_name }}"
-          token: "${{ secrets.GITHUB_TOKEN }}"
-          generate_release_notes: true
-          prerelease: true
-          files: build/*.zip
+          name: "[TEST] generation ${{ github.ref_name }}"
+          overwrite: true
+          path: build/*.zip
