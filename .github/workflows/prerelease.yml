@@ -27,5 +27,5 @@ jobs:
       - name: Create Artifacts
         uses: actions/upload-artifact@v4
         with:
-          overwrite: true
+          name: ThemeBundle
           path: build/*.zip
