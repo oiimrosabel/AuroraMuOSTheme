@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 import shutil
 import sys
 
@@ -7,24 +7,24 @@ import muos_rezolution.tools.files_tools as d
 import muos_rezolution.tools.mustache_tools as m
 
 
-def mergeFolders(srcPath: str, destPath):
-    if not os.path.exists(destPath):
-        os.makedirs(destPath)
+def mergeFolders(srcPath: Path, destPath: Path):
+    if not destPath.exists():
+        destPath.mkdir()
 
-    for root, _, files in os.walk(srcPath):
+    for root, _, files in srcPath.walk():
         for file in files:
-            src_file = os.path.join(root, file)
-            dst_file = os.path.join(destPath, os.path.relpath(src_file, srcPath))
+            srcFile: Path = root / file
+            dstFile: Path = destPath / srcFile.relative_to(srcPath)
 
-            if not os.path.exists(dst_file):
-                os.makedirs(os.path.dirname(dst_file), exist_ok=True)
-                shutil.copy2(src_file, dst_file)
+            if not dstFile.exists():
+                dstFile.mkdir(exist_ok=True)
+                shutil.copy2(srcFile, dstFile)
             else:
-                c.warning(f"File {dst_file} already exists")
+                c.warning(f"File {dstFile} already exists")
     c.success(f"Merged {srcPath} to {destPath}")
 
 
-def generateSchemes(templatePath: str, dataPath: str, outputPath: str):
+def generateSchemes(templatePath: Path, dataPath: Path, outputPath: Path):
     templateStr = d.readFile(templatePath)
     dataDict = m.interpretAsJson(d.readFile(dataPath))
     output = m.replaceMustaches(templateStr, dataDict)
@@ -32,14 +32,14 @@ def generateSchemes(templatePath: str, dataPath: str, outputPath: str):
     c.success(f"Scheme generated in {outputPath}")
 
 
-def cookTheme(interPath: str, srcPath: str, commonPath: str):
-    if not os.path.exists(interPath):
+def cookTheme(interPath: Path, srcPath: Path, commonPath: Path):
+    if not interPath.exists():
         c.error(f"Invalid intermediate path : {interPath}")
         sys.exit(1)
-    if not os.path.exists(srcPath):
+    if not srcPath.exists():
         c.error(f"Invalid source path : {srcPath}")
         sys.exit(1)
-    if not os.path.exists(commonPath):
+    if not commonPath.exists():
         c.error(f"Invalid common path : {commonPath}")
         sys.exit(1)
     mergeFolders(commonPath, interPath)
@@ -47,17 +47,12 @@ def cookTheme(interPath: str, srcPath: str, commonPath: str):
     c.success(f"Theme cooked in {interPath}")
 
 
-def zipFolder(srcPath: str, destPath: str):
-    if not os.path.exists(srcPath):
+def zipFolder(srcPath: Path, destPath: Path):
+    if not srcPath.exists():
         c.error(f"Invalid path : {srcPath}")
         sys.exit(1)
-    if destPath.endswith(".zip"):
-        destPath = destPath[:-len(".zip")]
+    if destPath.suffix == ".zip":
+        destPath = destPath.stem
 
-    currentDir = os.getcwd()
-    absDestPath = os.path.abspath(destPath)
-    os.chdir(srcPath)
-    shutil.make_archive(absDestPath, "zip", root_dir=".", base_dir=".")
-    os.chdir(currentDir)
-
+    shutil.make_archive(destPath, "zip", root_dir=srcPath, base_dir=".")
     c.success(f"Archived {srcPath} into {destPath}.zip")

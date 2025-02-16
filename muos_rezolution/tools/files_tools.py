@@ -1,68 +1,68 @@
-import glob
-import os
-import shutil
+from os import EX_DATAERR
+from pathlib import Path
+import sys
 
 import muos_rezolution.tools.display_tools as c
 
 
-def deleteFile(path: str):
-    if not os.path.exists(path):
+def deleteFile(path: Path):
+    if not path.exists():
         c.warning(f"{path} does not exist")
         return
-    if not os.path.isfile(path):
+    if not path.is_file():
         c.warning(f"{path} is not a file")
         return
-    os.remove(path)
+    path.unlink()
     c.success(f"Deleted file {path}")
 
 
-def deleteFolder(path: str):
-    if not os.path.exists(path):
+def deleteFolder(path: Path):
+    if not path.exists():
         c.warning(f"{path} does not exist")
         return
-    if not os.path.isdir(path):
+    if not path.is_dir():
         c.warning(f"{path} is not a directory")
-    shutil.rmtree(path)
+    path.rmdir()
     c.success(f"Deleted folder {path}")
 
 
-def deleteFilesInFolder(path: str):
-    if not os.path.exists(path):
+def deleteFilesInFolder(path: Path):
+    if not path.exists():
         c.warning(f"{path} does not exist")
         return
-    for file in glob.glob(f"{path}/*"):
-        if os.path.isfile(file):
+    for file in path.glob("*"):
+        if file.is_file():
             deleteFile(file)
         else:
             deleteFolder(file)
 
 
-def readFile(filePath: str) -> str:
+def readFile(filePath: Path) -> str:
     try:
-        with open(filePath, "r", encoding="utf-8") as file:
+        with filePath.open(mode="r", encoding="utf-8") as file:
             c.success(f"File {filePath} read successfully")
             return file.read()
     except FileNotFoundError:
         c.error(f"File not found : {filePath}")
-        exit(os.EX_DATAERR)
+        sys.exit(EX_DATAERR)
 
 
-def saveFile(filePath: str, content: str) -> None:
+def saveFile(filePath: Path, content: str) -> None:
     try:
-        with open(filePath, 'w', encoding='utf-8') as file:
+        with filePath.open(mode="w", encoding="utf-8") as file:
             file.write(content)
             c.success(f"File {filePath} saved successfully")
     except FileNotFoundError:
         c.error(f"File not found : {filePath}")
-        exit(os.EX_DATAERR)
+        sys.exit(EX_DATAERR)
     except IOError as e:
         c.error(f"Unable to edit '{filePath}': {e}")
-        exit(os.EX_DATAERR)
+        sys.exit(EX_DATAERR)
 
 
-def createFolder(path: str):
-    if os.path.exists(path):
+def createFolder(path: Path):
+    if path.exists():
         c.warning(f"{path} already exists")
         return
-    os.makedirs(path, exist_ok=True)
+    path.mkdir(exist_ok=True)
     c.success(f"Created folder '{path}'")
