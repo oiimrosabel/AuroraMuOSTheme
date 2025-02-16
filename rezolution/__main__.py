@@ -62,7 +62,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-t",
         "--theme",
-        help="theme variant to generate (Dark, Indigo, OLED, White)",
+        help="theme variant to generate (Dark, Indigo, OLED, White, All)",
         metavar="THEME",
         type=str,
         dest="theme",
