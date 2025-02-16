@@ -10,9 +10,9 @@ import rezolution.tools.generate_tools as g
 # Paths
 root = Path(__file__).parent / "resources"
 iconsFolder = root / "__icons"
-buildFolder = "build"
+buildFolder = Path("build")
 factoryFolder = root / "__factory"
-interFolder = f"{buildFolder}/__intermediate"
+interFolder = buildFolder / "__intermediate"
 commonFolder = root / "__common"
 
 
@@ -22,19 +22,19 @@ def generateMacro(themeName: str, gridSupport=False):
         gridNameSupplement = "Grid"
     d.createFolder(interFolder)
     c.task(f"Generating schemes for {themeName} version...")
-    g.cookTheme(interFolder, f"../{themeName}/", commonFolder)
-    d.createFolder(f"{interFolder}/scheme")
-    g.generateSchemes(f"{factoryFolder}/template/default.txt",
-                      f"{factoryFolder}/data/template{themeName}.json",
-                      f"{interFolder}/scheme/default.txt")
-    g.generateSchemes(f"{factoryFolder}/template/muxlaunch.txt",
-                      f"{factoryFolder}/data/template{themeName}.json",
-                      f"{interFolder}/scheme/muxlaunch.txt")
+    g.cookTheme(interFolder, root / themeName, commonFolder)
+    d.createFolder(interFolder / "scheme")
+    g.generateSchemes(factoryFolder / "template/default.txt",
+                      factoryFolder / f"data/template{themeName}.json",
+                      interFolder / "scheme/default.txt")
+    g.generateSchemes(factoryFolder / "template/muxlaunch.txt",
+                      factoryFolder / f"data/template{themeName}.json",
+                      interFolder / "scheme/muxlaunch.txt")
     if gridSupport:
-        g.generateSchemes(f"{factoryFolder}/template/muxplore.txt",
-                          f"{factoryFolder}/data/template{themeName}.json",
-                          f"{interFolder}/scheme/muxplore.txt")
-    g.zipFolder(interFolder, f"{buildFolder}/Rezolution{themeName}{gridNameSupplement}.zip")
+        g.generateSchemes(factoryFolder / "template/muxplore.txt",
+                          factoryFolder / f"data/template{themeName}.json",
+                          interFolder / "scheme/muxplore.txt")
+    g.zipFolder(interFolder, buildFolder / f"Rezolution{themeName}{gridNameSupplement}.zip")
     d.deleteFilesInFolder(interFolder)
 
 
@@ -48,7 +48,7 @@ def generate(macros: list[str], grid: str):
     if grid in {"both", "on"}:  # if Yes or Both
         for macro in macros:
             generateMacro(macro, True)
-        g.zipFolder(iconsFolder, f"{buildFolder}/RezolutionIcons.zip")
+        g.zipFolder(iconsFolder, buildFolder / "RezolutionIcons.zip")
     c.task("Cleaning up...")
     d.deleteFolder(interFolder)
 
