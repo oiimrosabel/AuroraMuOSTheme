@@ -2,7 +2,6 @@
 
 from argparse import ArgumentParser
 from pathlib import Path
-import sys
 
 import rezolution.tools.display_tools as c
 import rezolution.tools.files_tools as d
@@ -65,8 +64,9 @@ if __name__ == "__main__":
         "--theme",
         help="theme variant to generate (Dark, Indigo, OLED, White)",
         metavar="THEME",
-        dest="theme",
         type=str,
+        dest="theme",
+        default="All",
     )
     parser.add_argument(
         "-g",
@@ -86,20 +86,15 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    macros_list = ["Dark", "Indigo", "OLED", "White"]
     if args.interactive_flag:
         res = c.ask("Do you want to generate the theme with grid support ?", ["Both", "No", "Yes"])
         grid = ("both", "off", "on")[res]
 
-        macros_list = ["Dark", "Indigo", "OLED", "White"]
         macro_choice = c.ask("Which theme variants do you want?", ["All", *macros_list])
         macros = macros_list if macro_choice == "All" else macros_list[macro_choice - 1]
     else:
-        if args.theme is None:
-            print("Must provide theme in non-interactive mode.\n")
-            parser.print_usage()
-            sys.exit(1)
-
         grid = args.grid_style
-        macros = list(set(s.strip() for s in args.theme.split(",")))
+        macros = macros_list if args.theme == "All" else list(set(s.strip() for s in args.theme.split(",")))
 
     generate(macros, grid)
