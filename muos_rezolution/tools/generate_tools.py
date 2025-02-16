@@ -17,7 +17,7 @@ def mergeFolders(srcPath: Path, destPath: Path):
             dstFile: Path = destPath / srcFile.relative_to(srcPath)
 
             if not dstFile.exists():
-                dstFile.mkdir(exist_ok=True)
+                dstFile.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(srcFile, dstFile)
             else:
                 c.warning(f"File {dstFile} already exists")
@@ -51,8 +51,6 @@ def zipFolder(srcPath: Path, destPath: Path):
     if not srcPath.exists():
         c.error(f"Invalid path : {srcPath}")
         sys.exit(1)
-    if destPath.suffix == ".zip":
-        destPath = destPath.stem
 
-    shutil.make_archive(destPath, "zip", root_dir=srcPath, base_dir=".")
+    shutil.make_archive(destPath.parent / destPath.stem, "zip", root_dir=srcPath, base_dir=".")
     c.success(f"Archived {srcPath} into {destPath}.zip")
