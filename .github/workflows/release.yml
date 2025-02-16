@@ -22,7 +22,6 @@ jobs:
           python-version: "3.13"
 
       - name: Generate Theme Archives
-        working-directory: ./__scripts
         run: python generate.py <<< "2"
 
       - name: Create Release
@@ -32,4 +31,4 @@ jobs:
           token: "${{ secrets.GITHUB_TOKEN }}"
           generate_release_notes: true
           prerelease: false
-          files: __build/*.zip
+          files: build/*.zip

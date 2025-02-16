@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+
+from argparse import ArgumentParser
+from pathlib import Path
+import sys
+
+import rezolution.tools.display_tools as c
+import rezolution.tools.files_tools as d
+import rezolution.tools.generate_tools as g
+
+# Paths
+root = Path(__file__).parent / "resources"
+iconsFolder = root / "__icons"
+buildFolder = "build"
+factoryFolder = root / "__factory"
+interFolder = f"{buildFolder}/__intermediate"
+commonFolder = root / "__common"
+
+
+def generateMacro(themeName: str, gridSupport=False):
+    gridNameSupplement = ""
+    if gridSupport:
+        gridNameSupplement = "Grid"
+    d.createFolder(interFolder)
+    c.task(f"Generating schemes for {themeName} version...")
+    g.cookTheme(interFolder, f"../{themeName}/", commonFolder)
+    d.createFolder(f"{interFolder}/scheme")
+    g.generateSchemes(f"{factoryFolder}/template/default.txt",
+                      f"{factoryFolder}/data/template{themeName}.json",
+                      f"{interFolder}/scheme/default.txt")
+    g.generateSchemes(f"{factoryFolder}/template/muxlaunch.txt",
+                      f"{factoryFolder}/data/template{themeName}.json",
+                      f"{interFolder}/scheme/muxlaunch.txt")
+    if gridSupport:
+        g.generateSchemes(f"{factoryFolder}/template/muxplore.txt",
+                          f"{factoryFolder}/data/template{themeName}.json",
+                          f"{interFolder}/scheme/muxplore.txt")
+    g.zipFolder(interFolder, f"{buildFolder}/Rezolution{themeName}{gridNameSupplement}.zip")
+    d.deleteFilesInFolder(interFolder)
+
+
+def generate(macros: list[str], grid: str):
+    c.task("Generating __build folder...")
+    d.deleteFolder(buildFolder)
+    d.createFolder(buildFolder)
+    if grid in {"both", "off"}:  # if No or Both
+        for macro in macros:
+            generateMacro(macro)
+    if grid in {"both", "on"}:  # if Yes or Both
+        for macro in macros:
+            generateMacro(macro, True)
+        g.zipFolder(iconsFolder, f"{buildFolder}/RezolutionIcons.zip")
+    c.task("Cleaning up...")
+    d.deleteFolder(interFolder)
+
+
+if __name__ == "__main__":
+    parser = ArgumentParser(
+        prog="rezolution",
+        description="An elegant and easy on the eyes MuOS theme.",
+        allow_abbrev=False,
+    )
+    parser.add_argument(
+        "-t",
+        "--theme",
+        help="theme variant to generate (Dark, Indigo, OLED, White)",
+        metavar="THEME",
+        dest="theme",
+        type=str,
+    )
+    parser.add_argument(
+        "-g",
+        "--grid",
+        help="generate themes with grid variant (on, off, both)",
+        metavar="GRID",
+        type=str,
+        dest="grid_style",
+        default="both",
+    )
+    parser.add_argument(
+        "-i",
+        "--interactive",
+        help="run in interactive mode",
+        action="store_true",
+        dest="interactive_flag",
+    )
+    args = parser.parse_args()
+
+    if args.interactive_flag:
+        res = c.ask("Do you want to generate the theme with grid support ?", ["Both", "No", "Yes"])
+        grid = ("both", "off", "on")[res]
+
+        macros_list = ["Dark", "Indigo", "OLED", "White"]
+        macro_choice = c.ask("Which theme variants do you want?", ["All", *macros_list])
+        macros = macros_list if macro_choice == "All" else macros_list[macro_choice - 1]
+    else:
+        if args.theme is None:
+            print("Must provide theme in non-interactive mode.\n")
+            parser.print_usage()
+            sys.exit(1)
+
+        grid = args.grid_style
+        macros = list(set(s.strip() for s in args.theme.split(",")))
+
+    generate(macros, grid)
