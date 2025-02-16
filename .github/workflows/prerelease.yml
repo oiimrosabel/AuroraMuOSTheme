@@ -1,0 +1,34 @@
+name: Generate Release Archives
+
+on:
+  push:
+    branches-ignore:
+      - "main"
+
+# Sets permissions of the GITHUB_TOKEN to allow releases
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Generate Theme Archives
+        run: python -m rezolution --grid both --theme All
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "[TEST] Release ${{ github.ref_name }}"
+          token: "${{ secrets.GITHUB_TOKEN }}"
+          generate_release_notes: true
+          prerelease: true
+          files: build/*.zip
