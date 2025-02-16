@@ -178,4 +178,5 @@ cython_debug/
 
 # Custom
 .vscode
+shell.nix
 __build
