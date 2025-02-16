@@ -1,5 +1,6 @@
 from os import EX_DATAERR
 from pathlib import Path
+from shutil import rmtree
 import sys
 
 import muos_rezolution.tools.display_tools as c
@@ -22,7 +23,7 @@ def deleteFolder(path: Path):
         return
     if not path.is_dir():
         c.warning(f"{path} is not a directory")
-    path.rmdir()
+    rmtree(path)
     c.success(f"Deleted folder {path}")
 
 
