@@ -3,7 +3,7 @@ name: Generate Release Archives
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "v*"
 
 # Sets permissions of the GITHUB_TOKEN to allow releases
 permissions:
