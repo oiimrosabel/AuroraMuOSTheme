@@ -20,7 +20,7 @@ def generateMacro(themeName: str, gridSupport=False):
     gridNameSupplement = "Grid" if gridSupport else ""
     d.createFolder(interFolder)
     c.task(f"Generating schemes for {themeName} version...")
-    g.cookTheme(interFolder, root / themeName, commonFolder)
+    g.cookTheme(interFolder, root / f"variants/{themeName}", commonFolder)
     d.createFolder(interFolder / "scheme")
     g.generateSchemes(factoryFolder / "template/default.txt",
                       factoryFolder / f"data/template{themeName}.json",
