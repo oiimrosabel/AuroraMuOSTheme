@@ -2,9 +2,9 @@ import os
 import shutil
 import sys
 
-import rezolution.tools.display_tools as c
-import rezolution.tools.files_tools as d
-import rezolution.tools.mustache_tools as m
+import muos_rezolution.tools.display_tools as c
+import muos_rezolution.tools.files_tools as d
+import muos_rezolution.tools.mustache_tools as m
 
 
 def mergeFolders(srcPath: str, destPath):

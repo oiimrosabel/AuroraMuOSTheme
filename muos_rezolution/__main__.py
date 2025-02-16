@@ -3,9 +3,9 @@
 from argparse import ArgumentParser
 from pathlib import Path
 
-import rezolution.tools.display_tools as c
-import rezolution.tools.files_tools as d
-import rezolution.tools.generate_tools as g
+import muos_rezolution.tools.display_tools as c
+import muos_rezolution.tools.files_tools as d
+import muos_rezolution.tools.generate_tools as g
 
 # Paths
 root = Path(__file__).parent / "resources"
