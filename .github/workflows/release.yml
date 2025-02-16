@@ -22,7 +22,7 @@ jobs:
           python-version: "3.13"
 
       - name: Generate Theme Archives
-        run: python -m rezolution --grid both --theme All
+        run: python -m muos_rezolution --grid both --theme All
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
