@@ -17,9 +17,7 @@ commonFolder = root / "__common"
 
 
 def generateMacro(themeName: str, gridSupport=False):
-    gridNameSupplement = ""
-    if gridSupport:
-        gridNameSupplement = "Grid"
+    gridNameSupplement = "Grid" if gridSupport else ""
     d.createFolder(interFolder)
     c.task(f"Generating schemes for {themeName} version...")
     g.cookTheme(interFolder, root / themeName, commonFolder)
