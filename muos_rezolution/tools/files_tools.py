@@ -1,6 +1,5 @@
 from os import EX_DATAERR
 from pathlib import Path
-from shutil import rmtree
 import sys
 
 import muos_rezolution.tools.display_tools as c
@@ -20,11 +19,12 @@ def deleteFile(path: Path):
 def deleteFolder(path: Path):
     if not path.exists():
         c.warning(f"{path} does not exist")
-        return
-    if not path.is_dir():
+    elif not path.is_dir():
         c.warning(f"{path} is not a directory")
-    rmtree(path)
-    c.success(f"Deleted folder {path}")
+    else:
+        deleteFilesInFolder(path)
+        path.rmdir()
+        c.success(f"Deleted folder {path}")
 
 
 def deleteFilesInFolder(path: Path):
