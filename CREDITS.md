@@ -22,4 +22,5 @@
 ### Special thanks
 - **Chronoss** (`chronoss0109`) for their help (and maybe for  translations in the future).
 - **Harry** (`harryarry`) for the help, and for providing a base theme I could use to make my own.
+- **cybardev** (`cybardev`) for easing out the release process.
 - **Bitter_Bizarro** (`bitter_bizarro`) for laying the foundation for this theme's grid support.

@@ -17,8 +17,15 @@
 - [x] Rework templates (`default.txt` -> `muxlaunch.txt`)
 
 ## Planned for Release 4 (Iter 5.X)
+- [ ] specific schemes for OLED
+- [ ] Re-rework headers in `default.png` (remove round corners)
+- [ ] Add icons
+    * Famicon Disk System (switch with the NES one)
+- [ ] Resize alt icons
+- [ ] Generic preview images (00:00 + grid symbol somewhere for grid variant)
 - [ ] extra resolutions
     - 1280x720 (HDMI support)
     - 720x720 (RG CubeXX)
     - 720x480 (RG34XX)
 - [ ] Replace "Favourites" with "Collection"
+- [ ] New variant : DMG
