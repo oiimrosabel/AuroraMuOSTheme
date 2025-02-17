@@ -8,12 +8,11 @@ import muos_rezolution.tools.display_tools as c
 def deleteFile(path: Path):
     if not path.exists():
         c.warning(f"{path} does not exist")
-        return
-    if not path.is_file():
+    elif not path.is_file():
         c.warning(f"{path} is not a file")
-        return
-    path.unlink()
-    c.success(f"Deleted file {path}")
+    else:
+        path.unlink()
+        c.success(f"Deleted file {path}")
 
 
 def deleteFolder(path: Path):
@@ -28,14 +27,14 @@ def deleteFolder(path: Path):
 
 
 def deleteFilesInFolder(path: Path):
-    if not path.exists():
+    if path.exists():
+        for file in path.glob("*"):
+            if file.is_file():
+                deleteFile(file)
+            else:
+                deleteFolder(file)
+    else:
         c.warning(f"{path} does not exist")
-        return
-    for file in path.glob("*"):
-        if file.is_file():
-            deleteFile(file)
-        else:
-            deleteFolder(file)
 
 
 def readFile(filePath: Path) -> str:
@@ -64,6 +63,6 @@ def saveFile(filePath: Path, content: str) -> None:
 def createFolder(path: Path):
     if path.exists():
         c.warning(f"{path} already exists")
-        return
-    path.mkdir(exist_ok=True)
-    c.success(f"Created folder '{path}'")
+    else:
+        path.mkdir(exist_ok=True)
+        c.success(f"Created folder '{path}'")
