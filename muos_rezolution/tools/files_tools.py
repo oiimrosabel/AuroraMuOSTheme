@@ -1,6 +1,7 @@
+import shutil
+import sys
 from os import EX_DATAERR
 from pathlib import Path
-import sys
 
 import muos_rezolution.tools.display_tools as c
 
@@ -12,7 +13,7 @@ def deleteFile(path: Path):
         c.warning(f"{path} is not a file")
     else:
         path.unlink()
-        c.success(f"Deleted file {path}")
+        c.info(f"Deleted file {path}")
 
 
 def deleteFolder(path: Path):
@@ -23,7 +24,7 @@ def deleteFolder(path: Path):
     else:
         deleteFilesInFolder(path)
         path.rmdir()
-        c.success(f"Deleted folder {path}")
+        c.info(f"Deleted folder {path}")
 
 
 def deleteFilesInFolder(path: Path):
@@ -40,18 +41,18 @@ def deleteFilesInFolder(path: Path):
 def readFile(filePath: Path) -> str:
     try:
         with filePath.open(mode="r", encoding="utf-8") as file:
-            c.success(f"File {filePath} read successfully")
+            c.info(f"File {filePath} read successfully")
             return file.read()
     except FileNotFoundError:
         c.error(f"File not found : {filePath}")
         sys.exit(EX_DATAERR)
 
 
-def saveFile(filePath: Path, content: str) -> None:
+def saveFile(filePath: Path, content: str):
     try:
         with filePath.open(mode="w", encoding="utf-8") as file:
             file.write(content)
-            c.success(f"File {filePath} saved successfully")
+            c.info(f"File {filePath} saved successfully")
     except FileNotFoundError:
         c.error(f"File not found : {filePath}")
         sys.exit(EX_DATAERR)
@@ -65,4 +66,22 @@ def createFolder(path: Path):
         c.warning(f"{path} already exists")
     else:
         path.mkdir(exist_ok=True)
-        c.success(f"Created folder '{path}'")
+        c.info(f"Created folder '{path}'")
+
+
+def mergeFolders(srcPath: Path, destPath: Path):
+    if not destPath.exists():
+        destPath.mkdir()
+
+    for root, _, files in srcPath.walk():
+        for file in files:
+            srcFile: Path = root / file
+            dstFile: Path = destPath / srcFile.relative_to(srcPath)
+
+            if not dstFile.parent.exists():
+                dstFile.parent.mkdir(parents=True, exist_ok=True)
+            if not dstFile.exists():
+                shutil.copy2(srcFile, dstFile)
+            else:
+                c.warning(f"File {dstFile} already exists")
+    c.info(f"Merged {srcPath} to {destPath}")

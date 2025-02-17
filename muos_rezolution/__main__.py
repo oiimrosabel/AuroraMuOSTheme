@@ -1,33 +1,29 @@
 #!/usr/bin/env python3
 
-from argparse import ArgumentParser
 from pathlib import Path
 
+import muos_rezolution.tools.arguments_tools as p
 import muos_rezolution.tools.display_tools as c
 import muos_rezolution.tools.files_tools as d
 import muos_rezolution.tools.generate_tools as g
 
 # Paths
 root = Path(__file__).parent / "resources"
-iconsFolder = root / "__icons"
+iconsFolder = root / "icons"
 buildFolder = Path("build")
-factoryFolder = root / "__factory"
+factoryFolder = root / "factory"
 interFolder = buildFolder / "__intermediate"
-commonFolder = root / "__common"
+commonFolder = root / "common"
 
 # Theme variants
-macros_list = sorted(["Dark", "Indigo", "OLED", "White"])
+supportedThemesList = ["Dark", "Indigo", "OLED", "White"]
 
 
 def generateMacro(themeName: str, gridSupport=False):
-    if gridSupport:
-        gridNameSupplement = "Grid"
-        gridMsg = " with Grid"
-    else:
-        gridNameSupplement = ""
-        gridMsg = ""
+    gridNameSupplement = p.ifttt(gridSupport, "Grid", "")
+    gridMsg = p.ifttt(gridSupport, " with Grid support", "")
     d.createFolder(interFolder)
-    c.task(f"Generating schemes for {themeName} version{gridMsg}...")
+    c.task(f"Generating theme file for {themeName} variant{gridMsg}...")
     g.cookTheme(interFolder, root / f"variants/{themeName}", commonFolder)
     d.createFolder(interFolder / "scheme")
     g.generateSchemes(factoryFolder / "template/default.txt",
@@ -42,64 +38,34 @@ def generateMacro(themeName: str, gridSupport=False):
                           interFolder / "scheme/muxplore.txt")
     g.zipFolder(interFolder, buildFolder / f"Rezolution{themeName}{gridNameSupplement}.zip")
     d.deleteFilesInFolder(interFolder)
+    c.success(f"{themeName} variant{gridMsg} generated successfully")
 
 
-def generate(macros: list[str], grid: str):
-    c.task("Generating __build folder...")
+def clean():
+    c.task("Cleaning up build folder...")
+    d.deleteFolder(buildFolder)
+    c.success("Cleaned successfully.")
+
+
+def generate(themes: list[str], grid: p.GridEnabler):
     d.deleteFolder(buildFolder)
     d.createFolder(buildFolder)
-    if grid in {"both", "off"}:  # if No or Both
-        for macro in macros:
+    if grid.declined():
+        for macro in themes:
             generateMacro(macro)
-    if grid in {"both", "on"}:  # if Yes or Both
-        for macro in macros:
+    if grid.accepted():
+        for macro in themes:
             generateMacro(macro, True)
         g.zipFolder(iconsFolder, buildFolder / "RezolutionIcons.zip")
     c.task("Cleaning up...")
     d.deleteFolder(interFolder)
+    c.success("Cleaned successfully. Enjoy !")
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser(
-        prog="muos_rezolution",
-        description="An elegant and easy on the eyes MuOS theme.",
-        allow_abbrev=False,
-    )
-    parser.add_argument(
-        "-t",
-        "--theme",
-        help=f"theme variant to generate ({', '.join(macros_list)}, All)",
-        metavar="THEME",
-        type=str,
-        dest="theme",
-        default="All",
-    )
-    parser.add_argument(
-        "-g",
-        "--grid",
-        help="generate themes with grid variant (on, off, both)",
-        metavar="GRID",
-        type=str,
-        dest="grid_style",
-        default="both",
-    )
-    parser.add_argument(
-        "-i",
-        "--interactive",
-        help="run in interactive mode",
-        action="store_true",
-        dest="interactive_flag",
-    )
-    args = parser.parse_args()
-
-    if args.interactive_flag:
-        res = c.ask("Do you want to generate the theme with grid support ?", ["Both", "No", "Yes"])
-        grid = ("both", "off", "on")[res]
-
-        macro_choice = c.ask("Which theme variants do you want?", ["All", *macros_list])
-        macros = macros_list if macro_choice == 0 else [macros_list[macro_choice - 1]]
+    parser = p.RezParser(supportedThemesList)
+    args = parser.parseArgs()
+    if args.cleanUp:
+        clean()
     else:
-        grid = args.grid_style
-        macros = macros_list if args.theme == "All" else [s.strip() for s in args.theme.split(",")]
-
-    generate(macros, grid)
+        generate(args.themes, args.grid)
