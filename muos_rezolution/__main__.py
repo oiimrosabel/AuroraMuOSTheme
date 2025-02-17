@@ -16,7 +16,7 @@ interFolder = buildFolder / "__intermediate"
 commonFolder = root / "__common"
 
 # Theme variants
-macros_list = ["Dark", "Indigo", "OLED", "White"]
+macros_list = sorted(["Dark", "Indigo", "OLED", "White"])
 
 
 def generateMacro(themeName: str, gridSupport=False):
