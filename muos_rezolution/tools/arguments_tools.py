@@ -23,11 +23,13 @@ class RezArguments:
     themes: list[str]
     grid: GridEnabler
     cleanUp: bool
+    iconPack: bool
 
-    def __init__(self, themes: list[str], grid: GridEnabler, cleanUp=False):
+    def __init__(self, themes: list[str], grid: GridEnabler, cleanUp=False, iconPack=False):
         self.themes = themes
         self.grid = grid
         self.cleanUp = cleanUp
+        self.iconPack = iconPack
 
 
 def parseStringEx(s: str, valid: list[str], wantsAll=allKeyword):
@@ -79,6 +81,13 @@ class RezParser(ArgumentParser):
             default=GridEnabler.BOTH,
         )
         self.add_argument(
+            "-p",
+            "--iconpack",
+            help="generates the icon pack and exits",
+            action="store_true",
+            dest="iconPackFlag",
+        )
+        self.add_argument(
             "-i",
             "--interactive",
             help="runs the program in interactive mode",
@@ -95,7 +104,7 @@ class RezParser(ArgumentParser):
         self.add_argument(
             "-c",
             "--clean",
-            help="removes the build folder",
+            help="removes the build folder and exits",
             action="store_true",
             dest="cleanFlag",
         )
@@ -107,13 +116,13 @@ class RezParser(ArgumentParser):
         if args.interactiveFlag:
             res = self.startInteractivePrompt()
         else:
-            res = RezArguments(args.theme, args.gridStyle, args.cleanFlag)
-        c.info(f"Got ({res.themes}, {res.grid}, {res.cleanUp})")
+            res = RezArguments(args.theme, args.gridStyle, args.cleanFlag, args.iconPackFlag)
+        c.info(f"Got ({res.themes}, {res.grid}, {res.cleanUp}, {res.iconPack})")
         return res
 
     def startInteractivePrompt(self) -> RezArguments:
         wantsGrid = c.ask("Do you want to generate the theme with grid support ?", ["Both", "No", "Yes"])
-        grid = GridEnabler(("both", "off", "on")[wantsGrid])
+        grid = [GridEnabler.BOTH, GridEnabler.OFF, GridEnabler.ON][wantsGrid]
 
         wantsThemes = c.ask("Which theme variants do you want?", [allKeyword] + self.rezVariants)
         themes = ifttt(

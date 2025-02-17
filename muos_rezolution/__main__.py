@@ -16,10 +16,10 @@ interFolder = buildFolder / "__intermediate"
 commonFolder = root / "common"
 
 # Theme variants
-supportedThemesList = ["Dark", "Indigo", "OLED", "White"]
+supportedThemesList = ["Dark", "White", "Indigo", "OLED", "DMG"]
 
 
-def generateMacro(themeName: str, gridSupport=False):
+def generateTheme(themeName: str, gridSupport=False):
     gridNameSupplement = p.ifttt(gridSupport, "Grid", "")
     gridMsg = p.ifttt(gridSupport, " with Grid support", "")
     d.createFolder(interFolder)
@@ -47,16 +47,22 @@ def clean():
     c.success("Cleaned successfully.")
 
 
-def generate(themes: list[str], grid: p.GridEnabler):
-    d.deleteFolder(buildFolder)
+def generateIconPack():
+    c.task("Generating icon pack...")
+    g.zipFolder(iconsFolder, buildFolder / "RezolutionIcons.zip")
+    c.success("Icon pack generated successfully.")
+
+
+def generateThemes(themes: list[str], grid: p.GridEnabler):
+    clean()
     d.createFolder(buildFolder)
     if grid.declined():
-        for macro in themes:
-            generateMacro(macro)
+        for theme in themes:
+            generateTheme(theme)
     if grid.accepted():
-        for macro in themes:
-            generateMacro(macro, True)
-        g.zipFolder(iconsFolder, buildFolder / "RezolutionIcons.zip")
+        for theme in themes:
+            generateTheme(theme, True)
+        generateIconPack()
     c.task("Cleaning up...")
     d.deleteFolder(interFolder)
     c.success("Cleaned successfully. Enjoy !")
@@ -65,7 +71,12 @@ def generate(themes: list[str], grid: p.GridEnabler):
 if __name__ == "__main__":
     parser = p.RezParser(supportedThemesList)
     args = parser.parseArgs()
-    if args.cleanUp:
-        clean()
-    else:
-        generate(args.themes, args.grid)
+    match True:
+        case args.cleanUp:
+            clean()
+            exit()
+        case args.iconPack:
+            generateIconPack()
+            exit()
+        case _:
+            generateThemes(args.themes, args.grid)

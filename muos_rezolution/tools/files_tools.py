@@ -69,7 +69,7 @@ def createFolder(path: Path):
         c.info(f"Created folder '{path}'")
 
 
-def mergeFolders(srcPath: Path, destPath: Path):
+def mergeFolders(srcPath: Path, destPath: Path, replace=False):
     if not destPath.exists():
         destPath.mkdir()
 
@@ -80,7 +80,7 @@ def mergeFolders(srcPath: Path, destPath: Path):
 
             if not dstFile.parent.exists():
                 dstFile.parent.mkdir(parents=True, exist_ok=True)
-            if not dstFile.exists():
+            if not dstFile.exists() or dstFile.exists() and replace:
                 shutil.copy2(srcFile, dstFile)
             else:
                 c.warning(f"File {dstFile} already exists")
