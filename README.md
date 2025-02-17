@@ -3,14 +3,14 @@
 
 ## Installation
 ### From the "Releases" page
-1. Head over to the **Releases** page : [link](https://github.com/oiimrosabel/RezolutionMuOSTheme)
+1. Head over to the **Releases** page : [link](https://github.com/oiimrosabel/RezolutionMuOSTheme/releases)
 2. Find the most recent release
 3. Download the zip with the variant you want
 4. Move it to `/MUOS/theme/` (on the `SD2`, or `SD1` if you use only one card)
 5. Apply the theme from the **Theme Picker**
 
 ### From source
-> **Warning** : before you start, bear in mind every action described here must be done on a **Linux distro** (or WSL) with a recent enough version of **Python** (>= Python 3.10).
+> **Warning** : before you start, bear in mind every action described here must be done on a **Linux distro** (or WSL) or macOS with a recent enough version of **Python** (>= Python 3.12).
 
 > **Warning** : This method may produce broken themes, as this repo contains untested code. If you don't mind that, or want to tinker with the tools I made, go ahead :3.
 
@@ -18,30 +18,21 @@
 ```bash
 git clone https://github.com/oiimrosabel/RezolutionMuOSTheme.git
 ```
-2. Go into the `__factory` folder at the root of the project :
+2. Execute the generation script. Note that it will prompt you whether you want your themes to be generated with grid support.
 ```bash
-cd ./__factory
+python3 -m muos_rezolution
 ```
-3. Execute the generation script. Note that it will prompt you whether you want your themes to be generated with grid support.
-```bash
-python3 ./generate.py
-```
-4. Head over to the `__build` folder at the root of the project. You should find at least 3 zips, one for each color variant.
-5. (**Optional**) If you plan to tinker with the theme (for example, to create your own), make sure to clean the `__build` folder by executing :
-```bash
-# cd ./__factory
-python3 ./clean.py
-```
-6. Move the zips to the correct folder, as indicated above (from the 4th instruction onwards)
+3. Head over to the `build` folder at the root of the project. You should find the theme `.zip` files, one for each color variant.
+4. Move the zips to the correct folder, as indicated above (from the 4th instruction onwards)
 
 #### TL;DR
-For convenience, you can copy-paste the following script into a `.sh` file and execute it using `bash` :
+For convenience, you can copy-paste the following script into a `.sh` file and execute it using `bash`, or paste it directly in the terminal and hit <kbd>Enter</kbd>:
 
 ```bash
 git clone https://github.com/oiimrosabel/RezolutionMuOSTheme.git
-cd ./RezolutionMuOSTheme/__factory
-python3 ./generate.py
-cd ../__build
+cd RezolutionMuOSTheme
+python3 -m muos_rezolution
+cd build
 ls
 ```
 
