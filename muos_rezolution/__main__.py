@@ -20,9 +20,14 @@ macros_list = ["Dark", "Indigo", "OLED", "White"]
 
 
 def generateMacro(themeName: str, gridSupport=False):
-    gridNameSupplement = "Grid" if gridSupport else ""
+    if gridSupport:
+        gridNameSupplement = "Grid"
+        gridMsg = " with Grid"
+    else:
+        gridNameSupplement = ""
+        gridMsg = ""
     d.createFolder(interFolder)
-    c.task(f"Generating schemes for {themeName} version...")
+    c.task(f"Generating schemes for {themeName} version{gridMsg}...")
     g.cookTheme(interFolder, root / f"variants/{themeName}", commonFolder)
     d.createFolder(interFolder / "scheme")
     g.generateSchemes(factoryFolder / "template/default.txt",
