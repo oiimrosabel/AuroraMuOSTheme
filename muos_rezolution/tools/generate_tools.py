@@ -16,8 +16,9 @@ def mergeFolders(srcPath: Path, destPath: Path):
             srcFile: Path = root / file
             dstFile: Path = destPath / srcFile.relative_to(srcPath)
 
+            if not dstFile.parent.exists():
+                dstFile.parent.mkdir(parents=True, exist_ok=True)
             if not dstFile.exists():
-                dstFile.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(srcFile, dstFile)
             else:
                 c.warning(f"File {dstFile} already exists")
