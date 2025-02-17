@@ -90,7 +90,7 @@ if __name__ == "__main__":
         grid = ("both", "off", "on")[res]
 
         macro_choice = c.ask("Which theme variants do you want?", ["All", *macros_list])
-        macros = macros_list if macro_choice == "All" else macros_list[macro_choice - 1]
+        macros = macros_list if macro_choice == 0 else [macros_list[macro_choice - 1]]
     else:
         grid = args.grid_style
         macros = macros_list if args.theme == "All" else list(set(s.strip() for s in args.theme.split(",")))
