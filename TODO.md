@@ -13,19 +13,28 @@
 - [x] Update `README.md`
 
 ## Planned for Release 3 (Iter 4.X)
+
 - [x] Add proper grid support (variant ?)
 - [x] Rework templates (`default.txt` -> `muxlaunch.txt`)
 
 ## Planned for Release 4 (Iter 5.X)
+
+- [x] Re-rework headers in `default.png` (remove round corners)
+- [x] New variant : DMG
 - [ ] specific schemes for OLED
-- [ ] Re-rework headers in `default.png` (remove round corners)
 - [ ] Add icons
     * Famicon Disk System (switch with the NES one)
+    * Sega Naomi (put previous icon in alts)
 - [ ] Resize alt icons
 - [ ] Generic preview images (00:00 + grid symbol somewhere for grid variant)
 - [ ] extra resolutions
     - 1280x720 (HDMI support)
     - 720x720 (RG CubeXX)
     - 720x480 (RG34XX)
+- [ ] Update `README.md`
+
+## Pixie update
+
 - [ ] Replace "Favourites" with "Collection"
-- [ ] New variant : DMG
+- [ ] Make "metatheme" installable with archive manager
+    - Subfolders ?  
