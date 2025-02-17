@@ -1,0 +1,24 @@
+name: Generate Test Artifacts
+
+on: push
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Generate Theme Archives
+        run: python -m muos_rezolution --grid both --theme All
+
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ThemeBundle
+          path: build/*.zip
