@@ -18,12 +18,16 @@
 ```bash
 git clone https://github.com/oiimrosabel/RezolutionMuOSTheme.git
 ```
-2. Execute the generation script. Note that it will prompt you whether you want your themes to be generated with grid support.
+2. Change to project root :
+```bash
+cd ./RezolutionMuOSTheme/
+```
+3. Execute the generation script. Note that it will prompt you whether you want your themes to be generated with grid support.
 ```bash
 python3 -m muos_rezolution
 ```
-3. Head over to the `build` folder at the root of the project. You should find the theme `.zip` files, one for each color variant.
-4. Move the zips to the correct folder, as indicated above (from the 4th instruction onwards)
+4. Head over to the `build` folder at the root of the project. You should find the theme `.zip` files, one for each color variant.
+5. Move the zips to the correct folder, as indicated above (from the 4th instruction onwards)
 
 #### TL;DR
 For convenience, you can copy-paste the following script into a `.sh` file and execute it using `bash`, or paste it directly in the terminal and hit <kbd>Enter</kbd>:
