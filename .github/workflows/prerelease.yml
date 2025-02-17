@@ -1,13 +1,6 @@
 name: Generate Test Artifacts
 
-on:
-  push:
-    branches-ignore:
-      - "main"
-
-# Sets permissions of the GITHUB_TOKEN to allow releases
-permissions:
-  contents: write
+on: push
 
 jobs:
   release:
