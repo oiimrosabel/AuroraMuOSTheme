@@ -15,6 +15,9 @@ factoryFolder = root / "__factory"
 interFolder = buildFolder / "__intermediate"
 commonFolder = root / "__common"
 
+# Theme variants
+macros_list = ["Dark", "Indigo", "OLED", "White"]
+
 
 def generateMacro(themeName: str, gridSupport=False):
     gridNameSupplement = "Grid" if gridSupport else ""
@@ -53,14 +56,14 @@ def generate(macros: list[str], grid: str):
 
 if __name__ == "__main__":
     parser = ArgumentParser(
-        prog="rezolution",
+        prog="muos_rezolution",
         description="An elegant and easy on the eyes MuOS theme.",
         allow_abbrev=False,
     )
     parser.add_argument(
         "-t",
         "--theme",
-        help="theme variant to generate (Dark, Indigo, OLED, White, All)",
+        help=f"theme variant to generate ({', '.join(macros_list)}, All)",
         metavar="THEME",
         type=str,
         dest="theme",
@@ -84,7 +87,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    macros_list = ["Dark", "Indigo", "OLED", "White"]
     if args.interactive_flag:
         res = c.ask("Do you want to generate the theme with grid support ?", ["Both", "No", "Yes"])
         grid = ("both", "off", "on")[res]
