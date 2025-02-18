@@ -21,11 +21,11 @@
 
 - [x] Re-rework headers in `default.png` (remove round corners)
 - [x] New variant : DMG
-- [ ] specific schemes for OLED
+- [x] Resize alt icons
+- [x] ~~specific schemes for OLED~~
 - [ ] Add icons
     * Famicon Disk System (switch with the NES one)
     * Sega Naomi (put previous icon in alts)
-- [ ] Resize alt icons
 - [ ] Generic preview images (00:00 + grid symbol somewhere for grid variant)
 - [ ] extra resolutions
     - 1280x720 (HDMI support)

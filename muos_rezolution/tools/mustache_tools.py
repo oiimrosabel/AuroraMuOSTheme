@@ -2,10 +2,8 @@ import json
 import os
 import re
 
+import muos_rezolution.tools.arguments_tools as p
 import muos_rezolution.tools.display_tools as c
-
-NOTFOUND_PLACEHOLDER = "##NOTFOUND##"
-nf = NOTFOUND_PLACEHOLDER
 
 
 def interpretAsJson(jsonString: str) -> dict:
@@ -16,5 +14,30 @@ def interpretAsJson(jsonString: str) -> dict:
         exit(os.EX_DATAERR)
 
 
+def removeCommentaries(template: str) -> str:
+    return re.sub(
+        "//.*?//",
+        lambda _ : "",
+        template
+    )
+
+def replaceConditionals(template: str, data: dict[str, bool]) -> str:
+    return re.sub(
+        "\\[\\[(.+?)\\?(.+?):(.+?)]]",
+        lambda m: str(
+            p.ifttt(
+                bool(data.get(m.group(1), False)),
+                m.group(2),
+                m.group(3)
+            )
+        ),
+        template
+    )
+
+
 def replaceMustaches(template: str, data: dict[str, str]) -> str:
-    return re.sub('{{(.*?)}}', lambda match: str(data.get(match.group(1), nf)), template)
+    return re.sub(
+        '\\{\\{([^:?]+?)}}',
+        lambda m: data.get(m.group(1), "##NOTFOUND##"),
+        template
+    )

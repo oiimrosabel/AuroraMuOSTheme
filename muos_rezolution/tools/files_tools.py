@@ -80,7 +80,10 @@ def mergeFolders(srcPath: Path, destPath: Path, replace=False):
 
             if not dstFile.parent.exists():
                 dstFile.parent.mkdir(parents=True, exist_ok=True)
-            if not dstFile.exists() or dstFile.exists() and replace:
+            replaceable = dstFile.exists() and replace
+            if not dstFile.exists() or replaceable:
+                if replaceable:
+                    c.warning(f"File {dstFile} exists, overwriting...")
                 shutil.copy2(srcFile, dstFile)
             else:
                 c.warning(f"File {dstFile} already exists")

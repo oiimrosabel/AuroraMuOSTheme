@@ -7,10 +7,22 @@ import muos_rezolution.tools.files_tools as d
 import muos_rezolution.tools.mustache_tools as m
 
 
+def process(template: str, data: dict[str, str | bool]):
+    return (
+        m.replaceMustaches(
+            m.replaceConditionals(
+                m.removeCommentaries(template),
+                data
+            ),
+            data
+        )
+    )
+
+
 def generateSchemes(templatePath: Path, dataPath: Path, outputPath: Path):
     templateStr = d.readFile(templatePath)
     dataDict = m.interpretAsJson(d.readFile(dataPath))
-    output = m.replaceMustaches(templateStr, dataDict)
+    output = process(templateStr, dataDict)
     d.saveFile(outputPath, output)
     c.info(f"Scheme generated in {outputPath}")
 
@@ -26,7 +38,7 @@ def cookTheme(interPath: Path, srcPath: Path, commonPath: Path):
         c.error(f"Invalid common path : {commonPath}")
         sys.exit(1)
     d.mergeFolders(commonPath, interPath)
-    d.mergeFolders(srcPath, interPath)
+    d.mergeFolders(srcPath, interPath, True)
     c.info(f"Theme cooked in {interPath}")
 
 
