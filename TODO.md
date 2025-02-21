@@ -23,6 +23,7 @@
 - [x] New variant : DMG
 - [x] Resize alt icons
 - [x] ~~specific schemes for OLED~~
+- [x] Recolor terminal
 - [ ] Add icons
     * Famicon Disk System (switch with the NES one)
     * Sega Naomi (put previous icon in alts)
