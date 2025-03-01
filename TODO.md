@@ -36,6 +36,12 @@
 
 ## Pixie update
 
-- [ ] Replace "Favourites" with "Collection"
-- [ ] Make "metatheme" installable with archive manager
-    - Subfolders ?  
+- [ ] ~~Make "metatheme" installable with archive manager~~
+- [x] New glyphs
+- [x] Replace each .txt by .bin
+- [x] Remove redundant data between schemes
+- [x] Add version.txt
+- [x] Replace "Favourites" with "Collection"
+  - Replace `muxfavourite` with `muxcollect`
+  - Replace `favourite` with `collection`
+- [ ] Last variant : Mustard

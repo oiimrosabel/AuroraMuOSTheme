@@ -180,3 +180,5 @@ cython_debug/
 .vscode
 shell.nix
 __build
+
+*.old

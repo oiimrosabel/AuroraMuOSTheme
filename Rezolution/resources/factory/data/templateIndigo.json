@@ -1,0 +1,14 @@
+{
+	"void": "000000",
+	
+	"text": "FFFFFF",
+	"active": "FFFFFF",
+	"low": "F94144",
+	
+	"bg": "4B4CAE",
+	"hover": "3B3C98",
+	"widget": "7174C9",
+	
+	"radius": "24",
+	"padding": "15"
+}
