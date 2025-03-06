@@ -44,4 +44,5 @@
 - [x] Replace "Favourites" with "Collection"
   - Replace `muxfavourite` with `muxcollect`
   - Replace `favourite` with `collection`
+- [ ] Change theme's name
 - [ ] Last variant : Mustard
