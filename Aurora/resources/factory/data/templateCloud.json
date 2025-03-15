@@ -1,0 +1,17 @@
+{
+	"void": "000000",
+	
+	"text": "0F1528",
+	"active": "5468E3",
+	"low": "F94144",
+	
+	"bg": "F6FFF8",
+	"widget": "E7F0EA",
+
+	"hover": "8697FF",
+	"hover2": "5468E3",
+	"hoverText": "FFFFFF",
+	
+	"radius": "24",
+	"padding": "15"
+}

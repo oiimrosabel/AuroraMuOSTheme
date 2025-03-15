@@ -1,12 +1,12 @@
-# Rezolution
+# Aurora
 
-**A simple, modern and elegant muOS theme inspired by GTK4.**
+**A simple, modern and elegant muOS theme.**
 
 ## Installation
 
 ### From the "Releases" page
 
-1. Head over to the **Releases** page : [link](https://github.com/oiimrosabel/RezolutionMuOSTheme/releases)
+1. Head over to the **Releases** page : [link](https://github.com/oiimrosabel/AuroraMuOSTheme/releases)
 2. Find the most recent release
 3. Download the zip with the variant you want
 4. Move it to `/MUOS/theme/` (on the `SD2`, or `SD1` if you use only one card)
@@ -23,19 +23,19 @@
 1. Clone this repo :
 
 ```bash
-git clone https://github.com/oiimrosabel/RezolutionMuOSTheme.git
+git clone https://github.com/oiimrosabel/AuroraMuOSTheme.git
 ```
 
 2. Change to project root :
 
 ```bash
-cd ./RezolutionMuOSTheme/
+cd ./AuroraMuOSTheme/
 ```
 
 3. Execute the generation script.
 
 ```bash
-python3 -m muos_rezolution
+python3 -m Aurora
 ```
 
 4. Head over to the `build` folder at the root of the project. You should find the theme `.zip` files, one for each
@@ -49,19 +49,19 @@ Here are some examples :
 
 ```bash
 # Generates zips for the Dark AND OLED variant without grid support
-python3 -m muos_rezolution -t Dark,OLED -g off
+python3 -m Aurora -t Moon,Midnight -g off
 
 # Generates zips for the White variant with AND without grid support (also generates the icon pack)
-python3 -m muos_rezolution -t White -g both
+python3 -m Aurora -t Cloud -g both
 
 # Cleans the build folder
-python3 -m muos_rezolution -c 
+python3 -m Aurora -c 
 
 # Generates the icon pack
-python3 -m muos_rezolution -p
+python3 -m Aurora -p
 
 # Shows all the available arguments
-python3 -m muos_rezolution -h
+python3 -m Aurora -h
 ```
 
 #### TL;DR
@@ -70,8 +70,8 @@ For convenience, you can copy-paste the following script into a `.sh` file and e
 directly in the terminal and hit <kbd>Enter</kbd>:
 
 ```bash
-git clone https://github.com/oiimrosabel/RezolutionMuOSTheme.git
-cd ./RezolutionMuOSTheme
+git clone https://github.com/oiimrosabel/AuroraMuOSTheme.git
+cd ./AuroraMuOSTheme
 python3 -m muos_rezolution
 cd build
 ls
@@ -81,12 +81,12 @@ ls
 
 This theme officially support muOS's grid layout for the "Explore" page. To do so, follow those steps :
 
-1. Obtain the icons archive, it's usually referred to as `RezolutionIcons.zip`. You can obtain it...
+1. Obtain the icons archive, it's usually referred to as `AuroraConsoleIcons.zip`. You can obtain it...
     * from the **Releases** page (see above)
     * alongside the generated zips if you opted for the manual way. Note that it will only be generated if you
       answered "**Yes**" or "**Both**" to the prompt at the start of the generation script.
 2. Put it into the `ARCHIVE` folder at the root of either `SD1` or `SD2`.
-3. Go into `Apps` > `ArchiveManager` and select `[SDX] RezolutionIcons`. Wait for the installation script to finish.
+3. Go into `Apps` > `ArchiveManager` and select `[SDX] AuroraConsoleIcons`. Wait for the installation script to finish.
 4. Make sure to select a theme variant with grid support (they usually ends with `Grid`).
 
 ## Troubleshooting

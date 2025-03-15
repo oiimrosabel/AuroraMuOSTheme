@@ -44,5 +44,19 @@
 - [x] Replace "Favourites" with "Collection"
   - Replace `muxfavourite` with `muxcollect`
   - Replace `favourite` with `collection`
-- [ ] Change theme's name
-- [ ] Last variant : Mustard
+- [ ] ~~Last variant : Mustard~~
+
+## Aurora
+- [x] Export pictures
+- [x] Change all mentions of "Rezolution" from code
+- [x] Change theme names from
+	- [x] Folders
+	- [x] Template files
+	- [x] Code
+	- [x] Theme name files
+- [x] Change scheme templates with new colors
+	- [x] Add gradient
+- [x] Add "star" icon to "muxsysinfo" screen
+- [x] Change GitHub repo
+	- [x] Add thumbnail
+- [ ] New release

@@ -15,7 +15,7 @@ jobs:
           python-version: "3.13"
 
       - name: Generate Theme Archives
-        run: python -m muos_rezolution --grid both --theme All
+        run: python -m Aurora --grid both --theme All
 
       - name: Create Artifacts
         uses: actions/upload-artifact@v4
