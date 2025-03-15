@@ -13,10 +13,9 @@
 
 ### Images
 
-- Buttons backgrounds by **Codioful (Formerly Gradienta)**
-    - [Website link](https://codioful.com/)
-    - [Unsplash](https://unsplash.com/@codioful)
-    - used on Dark and White variants
+- Buttons backgrounds taken from **I Love Hue Too** (by **Zut!**)
+    * [Developer's website](https://www.zutgames.com/)
+    * [Game's website](https://www.zutgames.com/i-love-hue-too.php)
 
 ### Icons
 
