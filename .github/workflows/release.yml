@@ -22,7 +22,7 @@ jobs:
           python-version: "3.13"
 
       - name: Generate Theme Archives
-        run: python -m Aurora --grid both --theme All
+        run: python -m Aurora
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
@@ -31,4 +31,4 @@ jobs:
           token: "${{ secrets.GITHUB_TOKEN }}"
           generate_release_notes: true
           prerelease: false
-          files: build/*.zip
+          files: build/*.mux*
