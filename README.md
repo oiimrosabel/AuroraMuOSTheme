@@ -2,9 +2,21 @@
 
 **A simple, modern and elegant muOS theme.**
 
+## Theme nomenclature
+
+If you're still used to the old nomeclature used when this theme was still called **Rezolution**, here's a little cheat sheet to know which theme is which :
+
+**Old name**|**New name**
+---|---
+Dark|Moon
+White|Cloud
+Indigo|Twilight
+OLED|Midnight
+DMG|Retro
+
 ## Installation
 
-### From the "Releases" page
+### From the **Releases** page
 
 1. Head over to the **Releases** page : [link](https://github.com/oiimrosabel/AuroraMuOSTheme/releases)
 2. Find the most recent release
@@ -48,11 +60,11 @@ The aforementioned script can make use arguments to finetune the generation proc
 Here are some examples :
 
 ```bash
-# Generates zips for the Dark AND OLED variant without grid support
+# Generates zips for the Dark AND OLED variant
 python3 -m Aurora -t Moon,Midnight -g off
 
-# Generates zips for the White variant with AND without grid support (also generates the icon pack)
-python3 -m Aurora -t Cloud -g both
+# Generates zips for the White variant
+python3 -m Aurora -t Cloud
 
 # Cleans the build folder
 python3 -m Aurora -c 
@@ -79,15 +91,14 @@ ls
 
 ## Grid support
 
-This theme officially support muOS's grid layout for the "Explore" page. To do so, follow those steps :
+This theme officially support muOS's grid layout for the **Explore** page. To do so, follow those steps :
 
 1. Obtain the icons archive, it's usually referred to as `AuroraConsoleIcons.muxzip`. You can obtain it...
     * from the **Releases** page (see above)
-    * alongside the generated zips if you opted for the manual way. Note that it will only be generated if you
-      answered "**Yes**" or "**Both**" to the prompt at the start of the generation script.
+    * alongside the generated zips if you opted for the manual way. You can also exclusively generate the icon pack by executing `python3 -m Aurora -p`.
 2. Put it into the `ARCHIVE` folder at the root of either `SD1` or `SD2`.
 3. Go into `Apps` > `ArchiveManager` and select `[SDX] AuroraConsoleIcons`. Wait for the installation script to finish.
-4. Make sure to select a theme variant with grid support (they usually ends with `Grid`).
+4. Select the alternative theme named **Grid Mode** in the **Customization** menu.
 
 ## Troubleshooting
 
@@ -96,7 +107,7 @@ This theme officially support muOS's grid layout for the "Explore" page. To do s
 > Please go into your `MUOS/theme/active` folder and remove everything in there, your system should now boot, and you
 > can choose a different (not broken) theme. - [Harry](https://hmcneill46.github.io/muOS-MinUIfied-Theme-Generator/)
 
-### An error occurred during the "generation" phase
+### An error occurred during the generation phase
 
 - Make sure the version of Python you're using is recent enough. Also, make sure you're using `python3` instead of
   `python` in the command prompt.
@@ -108,7 +119,7 @@ This theme officially support muOS's grid layout for the "Explore" page. To do s
 - If none of these steps solved your issue, send me a message on Discord by DMs (`@oiimrosabel`) with the error message,
   I'll help you troubleshoot the issue.
 
-### The "Explore" menu is empty
+### The **Explore** menu is empty
 
 That probably means you forgot to install the icon pack that goes alongside the themes. Refer to the **Grid support**
 section above to install it.

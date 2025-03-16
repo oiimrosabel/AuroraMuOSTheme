@@ -8,7 +8,7 @@
 ### Script
 
 - Grid support script by **Harry** (**harryarry**) for his **MinUIfied** theme
-- Python module/installation script by **cybardev** (**cybardev**)
+- Python module/generation script by **cybardev** (**cybardev**)
 
 ### Images
 
@@ -29,5 +29,5 @@
 
 - **Chronoss** (`chronoss0109`) for their help (and maybe for translations in the future).
 - **Harry** (`harryarry`) for the help, and for providing a base theme I could use to make my own.
-- **cybardev** (`cybardev`) for easing out the release process.
+- **cybardev** (`cybardev`) for re-implementing the generator in Python, and for automating the release process.
 - **Bitter_Bizarro** (`bitter_bizarro`) for laying the foundation for this theme's grid support.
