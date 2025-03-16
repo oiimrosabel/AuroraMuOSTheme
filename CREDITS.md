@@ -4,12 +4,11 @@
 
 - **Montserrat** by **Julieta Ulanovsky**, **Sol Matas**, **Juan Pablo del Peral** and **Jacques Le Bailly**
     - available on [Google Fonts](https://fonts.google.com/specimen/Montserrat)
-    - used on all variants
 
 ### Script
 
 - Grid support script by **Harry** (**harryarry**) for his **MinUIfied** theme
-- Python module/installation script by **cybardev (**cybardev**)
+- Python module/installation script by **cybardev** (**cybardev**)
 
 ### Images
 
@@ -19,8 +18,12 @@
 
 ### Icons
 
-- Original "Naomi" icon by **Lucie Viatgé**
+- "Sega Naomi" icon by **Lucie Viatgé**
 - All the other icons have been handmade by the creator (**Rosabel**) using Figma
+
+### Sound effects
+
+- Sound effects provided by **thicc parrot** (`pashia`)
 
 ### Special thanks
 

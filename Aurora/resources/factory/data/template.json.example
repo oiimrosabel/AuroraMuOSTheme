@@ -13,7 +13,5 @@
 	"hoverText": "000000"
 
 	"radius": "0",
-	"padding": "0",
-
-	"borders": false
+	"padding": "0"
 }

@@ -14,11 +14,11 @@
 
 ### From source
 
-> **Warning** : before you start, bear in mind every action described here must be done on a **Linux distro** (or **WSL
-**) or **macOS** with a recent enough version of **Python** (>= Python 3.12).
+> [!IMPORTANT]
+> Before you start, bear in mind every action described here must be done on a **Linux distro** (or **WSL**) or **macOS** with a recent enough version of **Python** (>= Python 3.12).
 
-> **Warning** : This method may produce broken themes, as this repo contains untested code. If you don't mind that, or
-> want to tinker with the tools I made, go ahead :3.
+> [!CAUTION]
+> This method may produce broken themes, as this repo contains untested code. If you don't mind that, or want to tinker with the tools I made, go ahead :3.
 
 1. Clone this repo :
 
@@ -72,7 +72,7 @@ directly in the terminal and hit <kbd>Enter</kbd>:
 ```bash
 git clone https://github.com/oiimrosabel/AuroraMuOSTheme.git
 cd ./AuroraMuOSTheme
-python3 -m muos_rezolution
+python3 -m Aurora
 cd build
 ls
 ```

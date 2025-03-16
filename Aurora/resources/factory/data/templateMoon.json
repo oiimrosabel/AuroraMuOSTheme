@@ -8,10 +8,10 @@
 	"bg": "090B12",
 	"widget": "0C101D",
 
-	"hover": "8697FF",
-	"hover2": "5468E3",
+	"hover": "5468E3",
+	"hover2": "6F32FF",
 	"hoverText": "FFFFFF",
 	
-	"radius": "24",
+	"radius": "32",
 	"padding": "15"
 }

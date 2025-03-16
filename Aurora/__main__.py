@@ -32,7 +32,7 @@ def generateTheme(themeName: str):
     g.generateSchemes(factoryFolder / "template/muxplore.ini",
                       factoryFolder / f"data/template{themeName}.json",
                       interFolder / "scheme/muxplore.ini")
-    g.zipFolder(interFolder, buildFolder / f"Aurora{themeName}.zip")
+    g.zipFolder(interFolder, buildFolder / f"Aurora{themeName}.zip", "muxthm")
     d.deleteFilesInFolder(interFolder)
     c.success(f"{themeName} variant generated successfully")
 
@@ -45,7 +45,7 @@ def clean():
 
 def generateIconPack():
     c.task("Generating icon pack...")
-    g.zipFolder(iconsFolder, buildFolder / "AuroraConsoleIcons.zip", True)
+    g.zipFolder(iconsFolder, buildFolder / "AuroraConsoleIcons.zip", "muxzip")
     c.success("Icon pack generated successfully.")
 
 

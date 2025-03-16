@@ -2,16 +2,16 @@
 	"void": "000000",
 	
 	"text": "FFFFFF",
-	"active": "5468E3",
+	"active": "70C3FF",
 	"low": "F94144",
 	
 	"bg": "000000",
 	"widget": "303030",
 
-	"hover": "8697FF",
-	"hover2": "5468E3",
-	"hoverText": "FFFFFF",
+	"hover": "70C3FF",
+	"hover2": "5E91FF",
+	"hoverText": "000000",
 	
-	"radius": "24",
+	"radius": "32",
 	"padding": "15"
 }
