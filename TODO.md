@@ -32,7 +32,8 @@
     - 1280x720 (HDMI support)
     - 720x720 (RG CubeXX)
     - 720x480 (RG34XX)
-- [ ] Update `README.md`
+- [x] Update `README.md`
+- [ ] Add sound effects ? 
 
 ## Pixie update
 

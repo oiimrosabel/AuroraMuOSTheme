@@ -1,5 +1,4 @@
 from argparse import ArgumentParser
-from enum import Enum
 
 import Aurora.tools.display_tools as c
 from Aurora.tools.__global__ import config as cf, ifttt
@@ -7,27 +6,13 @@ from Aurora.tools.__global__ import config as cf, ifttt
 allKeyword = "All"
 
 
-class GridEnabler(Enum):
-    ON = "on"
-    OFF = "off"
-    BOTH = "both"
-
-    def accepted(self):
-        return self != GridEnabler.OFF
-
-    def declined(self):
-        return self != GridEnabler.ON
-
-
 class RezArguments:
     themes: list[str]
-    grid: GridEnabler
     cleanUp: bool
     iconPack: bool
 
-    def __init__(self, themes: list[str], grid: GridEnabler, cleanUp=False, iconPack=False):
+    def __init__(self, themes: list[str], cleanUp=False, iconPack=False):
         self.themes = themes
-        self.grid = grid
         self.cleanUp = cleanUp
         self.iconPack = iconPack
 
@@ -53,7 +38,6 @@ class RezParser(ArgumentParser):
         )
 
         self.register("type", "ThemesList", lambda s: parseStringEx(s, self.rezVariants))
-        self.register("type", "GridEnabler", lambda s: GridEnabler(s))
 
         self.add_argument(
             "-t",
@@ -63,15 +47,6 @@ class RezParser(ArgumentParser):
             type='ThemesList',
             dest="theme",
             default=self.rezVariants,
-        )
-        self.add_argument(
-            "-g",
-            "--grid",
-            help=f"adds grid support ([{', '.join([x.value for x in GridEnabler])}], default : Both)",
-            metavar="GRID",
-            type="GridEnabler",
-            dest="gridStyle",
-            default=GridEnabler.BOTH,
         )
         self.add_argument(
             "-p",
@@ -109,14 +84,11 @@ class RezParser(ArgumentParser):
         if args.interactiveFlag:
             res = self.startInteractivePrompt()
         else:
-            res = RezArguments(args.theme, args.gridStyle, args.cleanFlag, args.iconPackFlag)
-        c.info(f"Got ({res.themes}, {res.grid}, {res.cleanUp}, {res.iconPack})")
+            res = RezArguments(args.theme, args.cleanFlag, args.iconPackFlag)
+        c.info(f"Got ({res.themes}, {res.cleanUp}, {res.iconPack})")
         return res
 
     def startInteractivePrompt(self) -> RezArguments:
-        wantsGrid = c.ask("Do you want to generate the theme with grid support ?", ["Both", "No", "Yes"])
-        grid = [GridEnabler.BOTH, GridEnabler.OFF, GridEnabler.ON][wantsGrid]
-
         wantsThemes = c.ask("Which theme variants do you want?", [allKeyword] + self.rezVariants)
         themes = ifttt(
             wantsThemes == 0,
@@ -124,4 +96,4 @@ class RezParser(ArgumentParser):
             [self.rezVariants[wantsThemes - 1]]
         )
 
-        return RezArguments(themes, grid)
+        return RezArguments(themes)

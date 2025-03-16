@@ -5,7 +5,6 @@ import Aurora.tools.arguments_tools as p
 import Aurora.tools.display_tools as c
 import Aurora.tools.files_tools as d
 import Aurora.tools.generate_tools as g
-from Aurora.tools.__global__ import ifttt
 
 # Paths
 root = Path(__file__).parent / "resources"
@@ -19,11 +18,9 @@ commonFolder = root / "common"
 supportedThemesList = ["Moon", "Cloud", "Twilight", "Midnight", "Retro"]
 
 
-def generateTheme(themeName: str, gridSupport=False):
-    gridNameSupplement = ifttt(gridSupport, "Grid", "")
-    gridMsg = ifttt(gridSupport, " with Grid support", "")
+def generateTheme(themeName: str):
     d.createFolder(interFolder)
-    c.task(f"Generating theme file for {themeName} variant{gridMsg}...")
+    c.task(f"Generating theme file for {themeName} variant...")
     g.cookTheme(interFolder, root / f"variants/{themeName}", commonFolder)
     d.createFolder(interFolder / "scheme")
     g.generateSchemes(factoryFolder / "template/global.ini",
@@ -32,13 +29,12 @@ def generateTheme(themeName: str, gridSupport=False):
     g.generateSchemes(factoryFolder / "template/muxlaunch.ini",
                       factoryFolder / f"data/template{themeName}.json",
                       interFolder / "scheme/muxlaunch.ini")
-    if gridSupport:
-        g.generateSchemes(factoryFolder / "template/muxplore.ini",
-                          factoryFolder / f"data/template{themeName}.json",
-                          interFolder / "scheme/muxplore.ini")
-    g.zipFolder(interFolder, buildFolder / f"Aurora{themeName}{gridNameSupplement}.zip")
+    g.generateSchemes(factoryFolder / "template/muxplore.ini",
+                      factoryFolder / f"data/template{themeName}.json",
+                      interFolder / "scheme/muxplore.ini")
+    g.zipFolder(interFolder, buildFolder / f"Aurora{themeName}.zip")
     d.deleteFilesInFolder(interFolder)
-    c.success(f"{themeName} variant{gridMsg} generated successfully")
+    c.success(f"{themeName} variant generated successfully")
 
 
 def clean():
@@ -53,16 +49,12 @@ def generateIconPack():
     c.success("Icon pack generated successfully.")
 
 
-def generateThemes(themes: list[str], grid: p.GridEnabler):
+def generateThemes(themes: list[str]):
     clean()
     d.createFolder(buildFolder)
-    if grid.declined():
-        for theme in themes:
-            generateTheme(theme)
-    if grid.accepted():
-        for theme in themes:
-            generateTheme(theme, True)
-        generateIconPack()
+    for theme in themes:
+        generateTheme(theme)
+    generateIconPack()
     c.task("Cleaning up...")
     d.deleteFolder(interFolder)
     c.success("Cleaned successfully. Enjoy !")
@@ -79,4 +71,4 @@ if __name__ == "__main__":
             generateIconPack()
             exit()
         case _:
-            generateThemes(args.themes, args.grid)
+            generateThemes(args.themes)

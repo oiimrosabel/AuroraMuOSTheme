@@ -38,7 +38,7 @@ cd ./AuroraMuOSTheme/
 python3 -m Aurora
 ```
 
-4. Head over to the `build` folder at the root of the project. You should find the theme `.zip` files, one for each
+4. Head over to the `build` folder at the root of the project. You should find the theme `.muxthm` files, one for each
    color variant.
 5. Move the zips to the correct folder, as indicated above (from the 4th instruction onwards)
 
@@ -81,7 +81,7 @@ ls
 
 This theme officially support muOS's grid layout for the "Explore" page. To do so, follow those steps :
 
-1. Obtain the icons archive, it's usually referred to as `AuroraConsoleIcons.zip`. You can obtain it...
+1. Obtain the icons archive, it's usually referred to as `AuroraConsoleIcons.muxzip`. You can obtain it...
     * from the **Releases** page (see above)
     * alongside the generated zips if you opted for the manual way. Note that it will only be generated if you
       answered "**Yes**" or "**Both**" to the prompt at the start of the generation script.

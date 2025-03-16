@@ -5,7 +5,6 @@ from pathlib import Path
 import Aurora.tools.display_tools as c
 import Aurora.tools.files_tools as d
 import Aurora.tools.mustache_tools as m
-from Aurora.tools.__global__ import ifttt
 
 
 def process(template: str, data: dict[str, str | bool]):
@@ -39,14 +38,13 @@ def cookTheme(interPath: Path, srcPath: Path, commonPath: Path):
     c.info(f"Theme cooked in {interPath}")
 
 
-def zipFolder(srcPath: Path, destPath: Path, isMuxZip=False):
+def zipFolder(srcPath: Path, destPath: Path, zipFormat="zip"):
     if not srcPath.exists():
         c.error(f"Invalid path : {srcPath}")
         sys.exit(1)
 
-    zipLabel = ifttt(isMuxZip, "muxzip", "muxthm")
     fullDestPath = str(destPath.parent / destPath.stem)
     shutil.make_archive(fullDestPath, "zip", root_dir=srcPath, base_dir=".")
-    shutil.move(f"{fullDestPath}.zip", f"{fullDestPath}.{zipLabel}")
-
-    c.info(f"Archived {srcPath} into {destPath}.{zipLabel}")
+    if zipFormat != "zip":
+        shutil.move(f"{fullDestPath}.zip", f"{fullDestPath}.{zipFormat}")
+    c.info(f"Archived {srcPath} into {destPath}.{zipFormat}")
